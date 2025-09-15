@@ -13,8 +13,11 @@ pipeline {
             steps {
                 echo 'Running Docker Container...'
                 sh '''
+                # Stop and remove existing container if exists
                 docker stop portfolio-container || true
                 docker rm portfolio-container || true
+
+                # Run the new container
                 docker run -d -p 8080:80 --name portfolio-container portfolio-website
                 '''
             }
