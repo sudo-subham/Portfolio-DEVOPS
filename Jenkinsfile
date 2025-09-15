@@ -2,13 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Repository') {
-            steps {
-                echo 'Cloning the GitHub repository...'
-                git 'https://github.com/sudo-subham/Portfolio-DEVOPS.git'
-            }
-        }
-
         stage('Build Docker Image') {
             steps {
                 echo 'Building Docker Image...'
@@ -19,7 +12,6 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 echo 'Running Docker Container...'
-                // Stop and remove container if already running
                 sh '''
                 docker stop portfolio-container || true
                 docker rm portfolio-container || true
@@ -31,7 +23,7 @@ pipeline {
 
     post {
         always {
-            echo 'Pipeline execution finished.'
+            echo 'Pipeline finished.'
         }
     }
 }
